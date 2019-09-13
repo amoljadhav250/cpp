@@ -32,16 +32,43 @@ class Graph{
 			}cout<<"\n";
  
 		}
+ 
+		void bfs(int s){
+			bool *visited = new bool[v];
+			for(int i=0;i<v;i++){
+				visited[v]=false;
+			}
+			list<int> Q;
+			visited[s]=true;
+			Q.push_back(s);
+ 
+			while(!Q.empty()){
+				int f=Q.front();
+				cout<<f<<"\t";
+				Q.pop_front();
+ 
+				for(auto it=adj[f].begin();it!=adj[f].end();it++){
+					if(visited[*it]==false){
+						Q.push_back(*it);
+							visited[*it]=true;
+					}
+				}
+			}
+		}
 };
  
  
 int main(){
 	cout<<"Hellow Graph:\n";
-	Graph g(5);
-	g.addEdge(0,2);
-	g.addEdge(0,4);
-	g.addEdge(1,3);
-	g.addEdge(2,4);
+	Graph g(4);
+    g.addEdge(0, 1); 
+    g.addEdge(0, 2); 
+    g.addEdge(1, 2); 
+    g.addEdge(2, 0); 
+    g.addEdge(2, 3); 
+    g.addEdge(3, 3); 
 	g.printGraph();
+	cout<<"BFS at vertex 2:\n";
+	g.bfs(2);
 	return 0;
 }
