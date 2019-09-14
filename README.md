@@ -1,2 +1,1 @@
-# hello-world1
-Into to GitHub
+Few important alogorithms
