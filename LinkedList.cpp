@@ -87,7 +87,6 @@ Node  *removeDuplicatesSorted2(Node *head){
 	return dummy->next;
 }
 
-
 void reverseList(Node **h){
 	if(*h==NULL){
 		return;
@@ -176,19 +175,29 @@ bool isPalindrome(Node *h){
 	}
 }
 
-
 int main() {
 	Node *h=newNode(1);
 	h->next=newNode(3);
+	appendList(&h,7);
 	appendList(&h,5);
-	appendList(&h,5);
+	appendList(&h,9);
 	appendList(&h,5);
 	appendList(&h,7);
-	appendList(&h,7);
-	appendList(&h,8);
-	cout<<"Print List:-\n";
+	appendList(&h,3);
+	appendList(&h,1);
+	cout<<"Print List 163:-\n";
 	printList(h);
-	h=removeDuplicatesSorted2(h);
+//	h=removeDuplicatesSorted2(h);
+	//reverseList(&h);
+	cout<<"Print List 167:-\n";
+	printList(h);
+	cout<<"Line 169\n";
+	if(isPalindrome(h)){
+		cout<<"Palindrom\n";
+	}else{
+		cout<<"Not palindrom\n";
+	}
+	//h=removeDuplicatesSorted2(h);
 	cout<<"Print List:-\n";
 	printList(h);
 	return 0;
