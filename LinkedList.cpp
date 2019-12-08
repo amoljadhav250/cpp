@@ -30,6 +30,35 @@ void printList(Node *head){
 	cout<<endl;
 }
 
+
+Node * removeNth(Node *h,int n){
+	int count=0;
+	Node *t=h;
+	while(t){
+		count++;
+		t=t->next;
+	}
+	if(count==n){
+		t=h;
+		h=t->next;
+		delete t;
+	}else if(count<n){
+		return h;
+	}
+	else{
+		t=h;
+		Node *prev=NULL;
+		int diff=count-n;
+		while(diff--){
+			prev=t;
+			t=t->next;
+		}
+		prev->next=t->next;
+		delete t;
+	}
+	return h;
+}
+
 void appendList(Node **h,int data){
 	if(*h==NULL){
 		*h=newNode(data);
