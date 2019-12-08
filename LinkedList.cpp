@@ -59,9 +59,37 @@ void removeDuplicatesSorted(Node *h){
 //	return h;
 }
 
+Node  *removeDuplicatesSorted2(Node *head){
+//	cout<<"in the function"<<endl;
+	if(head==NULL){
+		return head;
+	}
+//	cout<<"line 67"<<endl;
+	Node *dummy=new Node;
+	dummy->next=head;
+	Node *prev=dummy;
+	
+	Node *current=head;
+//	cout<<"line 73"<<endl;
+	while(current!=NULL){
+	//	cout<<"line 75"<<endl;
+//		cout<<"current->data"<<current->data<<endl;
+		while(current->next!=NULL && prev->next->data == current->next->data){
+			current = current->next;
+		}
+		if(prev->next == current){
+			prev=prev->next;
+		}else{
+			prev->next=current->next;
+		}
+		current=current->next;
+	}
+	return dummy->next;
+}
+
 int main() {
 	Node *h=newNode(1);
-	h->next=newNode(1);
+	h->next=newNode(3);
 	appendList(&h,5);
 	appendList(&h,5);
 	appendList(&h,5);
@@ -70,7 +98,7 @@ int main() {
 	appendList(&h,8);
 	cout<<"Print List:-\n";
 	printList(h);
-	removeDuplicatesSorted(h);
+	h=removeDuplicatesSorted2(h);
 	cout<<"Print List:-\n";
 	printList(h);
 	return 0;
