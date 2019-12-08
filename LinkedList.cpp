@@ -87,6 +87,96 @@ Node  *removeDuplicatesSorted2(Node *head){
 	return dummy->next;
 }
 
+
+void reverseList(Node **h){
+	if(*h==NULL){
+		return;
+	}
+	if((*h)->next == NULL){
+		return;
+	}
+	Node *prev=NULL;
+	Node *curr=*h;
+	Node *next=curr->next;
+	while(curr!=NULL){
+		next=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=next;
+	}
+	*h=prev;
+}
+
+bool compareList(Node *a, Node *b){
+	if(a==NULL && b==NULL){
+		return true;
+	}
+else if(a==NULL && b!=NULL){
+		return false;
+	}else if (b==NULL && a!=NULL){
+		return false;
+	}	else if(a->data==b->data && compareList(a->next,b->next)){
+		return true;
+	}else{
+		return false;
+	}
+	return false;
+}
+
+bool isPalindrome(Node *h){
+	if(h==NULL){
+		return true;
+	}
+	if(h->next==NULL){
+		return true;
+	}
+//	return false;
+//	cout<<"Line 126\n";
+	Node *fast=h;
+	Node *slow=h;
+	Node *mid=NULL;
+	Node *prev=NULL;
+//	cout<<"Line 133\n";
+	
+	while(fast!=NULL && fast->next!=NULL){
+		fast=fast->next->next;
+		prev=slow;
+		slow=slow->next;
+	}
+//	cout<<"Line 137\n";
+	
+	if(fast!=NULL){
+		mid=slow;
+		slow=slow->next;
+	}
+	prev->next=NULL;
+//	cout<<"Line 142\n";
+	
+	reverseList(&slow);
+//	cout<<"Line 144\n";
+	//return false;
+	printList(h);
+	printList(slow);
+	bool flag=compareList(h,slow);
+//	cout<<"Line 153\n";
+//	return false;
+	reverseList(&slow);
+	if(mid){
+		prev->next=mid;
+		mid->next=slow;
+	}else{
+		prev->next=slow;
+	}
+	
+	if(flag){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
 int main() {
 	Node *h=newNode(1);
 	h->next=newNode(3);
