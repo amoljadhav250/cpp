@@ -174,31 +174,48 @@ bool isPalindrome(Node *h){
 		return false;
 	}
 }
+Node *mergeLists(Node *a, Node *b){
+	Node *root=new Node;
+	if(a==NULL && b==NULL){
+		root=NULL;
+	//	return root;
+	}else if(a!=NULL && b==NULL){
+		root=a;
+	//	return root;
+	}else if(b!=NULL && a==NULL){
+		root=b;
+	//	return root;
+	}else if(a->data<=b->data){
+		cout<<"adata="<<a->data<<endl;
+		root->data=a->data;
+		root->next=mergeLists(a->next,b);
+	//	return root;
+	}else{
+		cout<<"bdata="<<b->data<<endl;
+		root->data=b->data;
+		root->next=mergeLists(a,b->next);
+		//return root;
+	}
+	return root;
+}
 
 int main() {
 	Node *h=newNode(1);
 	h->next=newNode(3);
-	appendList(&h,7);
+	appendList(&h,4);
 	appendList(&h,5);
 	appendList(&h,9);
-	appendList(&h,5);
-	appendList(&h,7);
-	appendList(&h,3);
-	appendList(&h,1);
-	cout<<"Print List 163:-\n";
-	printList(h);
-//	h=removeDuplicatesSorted2(h);
-	//reverseList(&h);
-	cout<<"Print List 167:-\n";
-	printList(h);
-	cout<<"Line 169\n";
-	if(isPalindrome(h)){
-		cout<<"Palindrom\n";
-	}else{
-		cout<<"Not palindrom\n";
-	}
-	//h=removeDuplicatesSorted2(h);
+	
+	Node *h1=newNode(2);
+	h1->next=newNode(3);
+	appendList(&h1,6);
+	appendList(&h1,7);
+	appendList(&h1,9);
+
 	cout<<"Print List:-\n";
 	printList(h);
+	printList(h1);
+	Node *h2=mergeLists(h,h1);
+	printList(h2);
 	return 0;
 }
